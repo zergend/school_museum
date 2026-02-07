@@ -1,1 +1,165 @@
-
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ exhibit.title }} - Школьный музей</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #4CAF50;
+            text-decoration: none;
+            font-size: 0.9em;
+        }
+        
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        
+        .exhibit-header {
+            margin-bottom: 30px;
+        }
+        
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        
+        .exhibit-meta {
+            color: #7f8c8d;
+            font-size: 0.9em;
+            margin-bottom: 20px;
+        }
+        
+        .exhibit-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            background-color: #eee;
+        }
+        
+        .exhibit-description {
+            font-size: 1.1em;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+        
+        .qr-section {
+            text-align: center;
+            margin: 30px 0;
+            padding: 20px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+        }
+        
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            margin: 0 auto 15px;
+            border: 1px solid #ddd;
+            padding: 10px;
+            background: white;
+        }
+        
+        .qr-info {
+            color: #7f8c8d;
+            font-size: 0.9em;
+        }
+        
+        .details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .detail-item {
+            padding: 15px;
+            background-color: #f8f9fa;
+            border-radius: 5px;
+        }
+        
+        .detail-label {
+            font-weight: bold;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        
+        footer {
+            margin-top: 40px;
+            text-align: center;
+            color: #7f8c8d;
+            font-size: 0.9em;
+            padding-top: 20px;
+            border-top: 1px solid #eee;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="/" class="back-link">← Вернуться к списку экспонатов</a>
+        
+        <div class="exhibit-header">
+            <h1>{{ exhibit.title }}</h1>
+            <div class="exhibit-meta">
+                <span>📅 Год: {{ exhibit.year }}</span> | 
+                <span>📍 Место: {{ exhibit.location }}</span>
+            </div>
+        </div>
+        
+        <img src="{{ url_for('static', filename='images/' + exhibit.image) }}" alt="{{ exhibit.title }}" class="exhibit-image">
+        
+        <div class="exhibit-description">
+            <p>{{ exhibit.description }}</p>
+        </div>
+        
+        <div class="details-grid">
+            <div class="detail-item">
+                <div class="detail-label">📅 Год создания</div>
+                <div>{{ exhibit.year }}</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">📍 Местонахождение</div>
+                <div>{{ exhibit.location }}</div>
+            </div>
+        </div>
+        
+        <div class="qr-section">
+            <h3>Отсканируйте QR-код для быстрого доступа</h3>
+            <img src="{{ url_for('static', filename='qr_codes/' + exhibit.qr_code) }}" alt="QR-код" class="qr-code">
+            <p class="qr-info">Сохраните этот QR-код на экспонате для быстрого доступа посетителей</p>
+        </div>
+        
+        <footer>
+            <p>Школьный музей им. А.С. Пушкина</p>
+            <p>Цифровой гид создан для проекта "Большие вызовы" 2025</p>
+        </footer>
+    </div>
+</body>
+</html>
